@@ -29,7 +29,8 @@ if [ -d "$repo_name" ]; then
   cd "$repo_name" && git pull origin "$branch"
 else
   echo "📥 Cloning repo..."
-  git clone https://$pat@${repo_url#https://}
+  echo "📡 Cloning from: https://$pat@$(echo $repo_url | sed 's|https://||')"
+  git clone "https://$pat@$(echo $repo_url | sed 's|https://||')"
   cd "$repo_name"
 fi
 git checkout "$branch"
